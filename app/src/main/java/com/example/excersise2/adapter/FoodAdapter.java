@@ -5,12 +5,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.excersise2.R;
 import com.example.excersise2.model.Food;
 
@@ -29,10 +32,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodAdapterVie
 
     public void setListFood(List<Food> list) {
         this.mList = list;
+        notifyDataSetChanged();
     }
 
     public interface IListener {
         void onItemClick(Food food);
+        void onItemClickDelete(Food food);
     }
 
 
@@ -43,14 +48,19 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodAdapterVie
         return new FoodAdapterViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull FoodAdapterViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClick(mList.get(position));
-            }
-        });
+        Food food = mList.get(position);
+        if (food == null) return;
+
+        holder.tvName.setText(food.getName());
+        holder.tvPrice.setText(food.getPrice() + " K");
+        holder.tvDes.setText(food.getDes());
+        Glide.with(mContext).load(food.getUrl()).into(holder.imgFood);
+        holder.layout.setOnClickListener(view -> listener.onItemClick(food));
+
+        holder.btnDelete.setOnClickListener(view -> listener.onItemClickDelete(food));
     }
 
     @Override
@@ -63,6 +73,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodAdapterVie
 
         public TextView tvName, tvPrice, tvDes;
         public LinearLayout layout;
+        public ImageView imgFood;
+        public Button btnDelete;
 
         public FoodAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +82,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodAdapterVie
             tvPrice = itemView.findViewById(R.id.tv_price_food);
             tvDes = itemView.findViewById(R.id.tv_des_food);
             layout = itemView.findViewById(R.id.layout_item);
+            imgFood = itemView.findViewById(R.id.img_food);
+            btnDelete = itemView.findViewById(R.id.btn_delete);
         }
     }
 

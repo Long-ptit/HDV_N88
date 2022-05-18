@@ -6,11 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".activity.FoodActivity">
 
+    <EditText
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/bg_tem"
+        android:hint="Search By name"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="10dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_view"
+        android:layout_marginTop="20dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"

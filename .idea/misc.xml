@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Nong/AndroidStudioProjects/Excersise2/app/src/main/res/drawable/bg_tem.xml" value="0.1075" />
         <entry key="..\:/Users/Nong/AndroidStudioProjects/Excersise2/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1905" />
         <entry key="..\:/Users/Nong/AndroidStudioProjects/Excersise2/app/src/main/res/layout/activity_add_food.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/Nong/AndroidStudioProjects/Excersise2/app/src/main/res/layout/activity_edit_food.xml" value="0.24895833333333334" />

@@ -7,37 +7,39 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIInterface {
 
     String path = "api/v1/food";
+
     //lấy toàn bộ các món ăn
-    @GET( path +"/getAll")
+    @GET(path +"/getAll")
     Call<List<Food>> getAllFood();
 
-    @FormUrlEncoded
-    @POST("v1/ephemeral_keys")
-    Call<JsonObject> getEmprieKey(
-            @Header("Authorization") String author,
-            @Field("customer") String customer_id,
-            @Header("Stripe-Version") String ver
-    );
+    @GET(path +"/getById/{id}")
+    Call<Food> getFoodById(@Path("id") String id);
 
-    @FormUrlEncoded
-    @POST("v1/payment_intents")
-    Call<JsonObject> createPayment(
-            @Header("Authorization") String author,
-            @Field("customer") String customer_id,
-            @Field("amount") String amount,
-            @Field("currency") String currency,
-            @Field("automatic_payment_methods[enabled]") String state
+    @POST(path + "/save")
+    Call<Food> saveFood(@Body Food food);
 
-    );
+    @POST(path + "/edit")
+    Call<Food> editFood(@Body Food food);
+
+    @GET(path + "/delete/{id}")
+    Call<Void> deleteFood(@Path("id") long id);
+
+    @GET(path + "/search/{key}")
+    Call<List<Food>> searchFood(@Path("key") String keyword);
 
 }
 

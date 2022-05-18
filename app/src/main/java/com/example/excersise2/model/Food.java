@@ -1,12 +1,15 @@
 package com.example.excersise2.model;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable {
     private long id;
     private String name;
     private long price;
     private String url;
     private String des;
 
+    public Food() {}
     public Food(String name, long price, String url, String des) {
         this.name = name;
         this.price = price;
